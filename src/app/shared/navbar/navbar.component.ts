@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit{
 
 
   public logout(): any{
-  this.keycloakService.logout("http://localhost:4201");
+  this.keycloakService.logout("http://localhost:4200");
   }
     constructor(public sidebarservice: SidebarService,private keycloakService: KeycloakService) { }
 

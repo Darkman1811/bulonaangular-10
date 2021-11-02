@@ -1,0 +1,38 @@
+<div class="modal fade" id="UpdateModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modifier un patient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="updatePatient()" *ngIf="editPatientModel">
+
+          <div class="form-group" *ngIf="editPatientModel.name[0].given">
+            <label for="prenomEdit">Prénom</label>
+            <input id="prenomEdit" type="text" class="form-control" placeholder="Prénom" name="prenomEdit" [(ngModel)]="editPatientModel.name[0].given[0]">
+          </div>
+          <div class="form-group" *ngIf="editPatientModel.name">
+            <label for="nomEdit">Nom</label>
+            <input id="nomEdit" type="text" class="form-control" placeholder="Nom" name="nomEdit" [(ngModel)]="editPatientModel.name[0].family">
+          </div>
+          <div class="form-group" *ngIf="editPatientModel.name">
+            <label for="prefixEdit">Prefix</label>
+            <input id="prefixEdit" type="text" class="form-control" placeholder="prefixEdit" name="prefixEdit" [(ngModel)]="editPatientModel.name[0].prefix">
+          </div>
+          <div class="form-group" *ngIf="editPatientModel.name[0].given">
+            <label for="titreEdit">Titre</label>
+            <input id="titreEdit" type="text" class="form-control" placeholder="Titre" name="titreEdit" [(ngModel)]="editPatientModel.name[0].given[1]">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+
+        <button class="btn btn-dark" (click)="updatePatient()" data-dismiss="modal"><i class="fa fa-check-square-o"></i>Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -39,9 +39,9 @@ function initializeKeycloak(keycloak: KeycloakService): any{
   return () =>
     keycloak.init({
       config: {
-        url: 'http://localhost:8080/auth',
-        realm: 'esante',
-        clientId: 'esante-bulon',
+        url: 'http://localhost:8090/auth',
+        realm: 'testrealm',
+        clientId: 'angular-client',
       },
       initOptions: {
         onLoad: 'login-required',  // allowed values 'login-required', 'check-sso';

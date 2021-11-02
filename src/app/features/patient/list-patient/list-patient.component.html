@@ -1,0 +1,50 @@
+<!-- Liste des patients -->
+<!-- Basic Table-->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Basic Table</h5>
+        <div class="table-responsive">
+          <table class="table" *ngIf="listPatientModel">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Prénom</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Prefix</th>
+              <th scope="col">Titre</th>
+              <th scope="col"
+                  colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let patient of listPatientModel">
+            <tr  *ngIf="checkPatient(patient)">
+
+              <th scope="row">{{patient.id}}</th>
+              <td >{{patient.name[0].given[0]}}</td>
+              <td >{{patient.name[0].family}}</td>
+              <td >{{patient.name[0].prefix}}</td>
+              <td >{{patient.name[0].given[1]}}</td>
+
+              <td>
+                <div class="btn-group m-1">
+                  <button (click)="editPatient(patient)" data-toggle="modal" data-target="#infoModal" class="btn btn-sm btn-info" >Details</button>
+               <button class="btn btn-sm btn-dark" (click)="editPatient(patient)"  data-toggle="modal" data-target="#UpdateModal">Modifier</button>
+
+                  <button class="btn btn-sm btn-danger" (click)="deletePatient(patient)">Supprimer</button>
+
+                </div>
+              </td>
+
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / Basic Table-->
+  <!-- Fin liste des patients -->
+</div>

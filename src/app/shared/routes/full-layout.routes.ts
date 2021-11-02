@@ -11,6 +11,10 @@ export const Full_ROUTES: Routes = [
       data: { title: 'features', roles: ['admin'] },
       canActivate: [KeycloakGuardGuard]
    },
+    { path: 'features',
+      loadChildren: () => import('../../features/features.module').then(m => m.FeaturesModule)
+
+    },
     {
         path: 'dashboard',
         loadChildren: () => import('../../dashboard/dashboard.module').then(m => m.DashboardModule)

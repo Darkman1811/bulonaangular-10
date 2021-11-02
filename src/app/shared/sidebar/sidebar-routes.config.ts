@@ -3,6 +3,8 @@ import { RouteInfo } from './sidebar.metadata';
 //Sidebar menu Routes and data
 export const ROUTES: RouteInfo[] = [
     { path: '/feature', title: 'feature', icon: 'zmdi zmdi-dot-circle-alt', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+    { path: '/features/patient/main', title: 'Patient', icon: 'zmdi zmdi-dot-circle-alt', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },
+
     {
         path: '', title: 'Dashboard', icon: 'zmdi zmdi-view-dashboard', class: 'sub', badge: '', badgeClass: '', isExternalLink: false, submenu: [
             { path: '/dashboard/ecommerce-v1', title: 'eCommerce V1', icon: 'zmdi zmdi-dot-circle-alt', class: '', badge: '', badgeClass: '', isExternalLink: false, submenu: [] },

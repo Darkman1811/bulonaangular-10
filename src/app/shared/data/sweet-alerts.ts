@@ -1,4 +1,5 @@
 import swal from 'sweetalert2';
+import Callback = JQuery.Deferred.Callback;
 
 // Simple Alert
 export function basicAlert() {
@@ -43,7 +44,7 @@ export function typeError() {
     swal("Error!", "You clicked the button!", "error");
 }
 
-// Custom Icon 
+// Custom Icon
 export function customIcon() {
     swal({ title: "Sweet!", text: "Here's a custom image.", imageUrl: "./assets/img/portrait/avatars/avatar-08.png" });
 }
@@ -145,25 +146,68 @@ export function promptFunction() {
 // Confirm Button Action
 export function confirmText() {
     swal({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: 'Etes vous sure?',
+        text: "Cette opération est ireverssible!",
         type: 'warning',
+
         showCancelButton: true,
         confirmButtonColor: '#0CC27E',
         cancelButtonColor: '#FF586B',
+
         confirmButtonText: 'Text Changed',
         cancelButtonText: "No, cancel"
     }).then(function (isConfirm) {
-        if (isConfirm) {
+
+        if (isConfirm.value) {
             swal(
-                'Changed!',
-                'Confirm button text was changed!!',
+                'Confirmée!',
+                'Opération confirmée!!',
                 'success'
             );
+
         }
+
     }).catch(swal.noop);
+
 }
 
+// Confirm Button Action
+export function confirmAction(callback) {
+
+  swal({
+    title: 'Etes vous sure?',
+    text: "Cette opération est ireverssible!",
+    type: 'warning',
+
+    showCancelButton: true,
+    confirmButtonColor: '#0CC27E',
+    cancelButtonColor: '#FF586B',
+
+    confirmButtonText: 'Oui, confirmer',
+    cancelButtonText: "Non, annuler"
+  }).then(function (isConfirm) {
+
+    if (isConfirm.value) {
+      swal(
+        'Confirmée!',
+        'Opération confirmée!!',
+        'success'
+      );
+      callback(true);
+
+    } else{
+      swal(
+        'Annulée!',
+        'Opération annulée!!',
+        'error',
+      );
+      callback(false);
+    }
+
+  }).catch(swal.noop);
+
+
+}
 // Confirm & Cancel Button
 export function confirmCancelButton() {
     swal({

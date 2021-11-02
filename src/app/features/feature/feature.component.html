@@ -14,11 +14,153 @@
 </div>
 <!-- End Breadcrumb-->
 <div class="row">
-	<div class="col-lg-12">
-		<div style="height:600px">
-			<!--Please remove the height before using this page-->
-			<h1>Blank</h1>
-			<p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
-		</div>
-	</div>
+      <div class="col-lg-12">
+          <!--Please remove the height before using this page-->
+
+          <h1>Blank</h1>
+          <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
+          <button (click)="callapi()">Call api</button>
+          <button (click)="save()">Save</button>
+          <button (click)="directFhirCall()">Save Directly to Fhir</button>
+          <button (click)="addPatient()">Add Patient</button>
+          <button (click)="getAllPatients()">Get all patients</button>
+ <p></p>
+
+        <div class="col-lg-4">
+          <!-- Large Size Modal -->
+          <button class="btn btn-primary btn-block m-1" data-toggle="modal" data-target="#AjoutModal">Ajouter un patient</button>
+          <!-- Modal  AJOUT-->
+          <div class="modal fade" id="AjoutModal">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Ajouter un patient</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #f="ngForm" (ngSubmit)="addPatient()" *ngIf="patientModel">
+
+                  <div class="form-group" *ngIf="patientModel.name[0].given">
+                    <label for="prenom">Prénom</label>
+                    <input id="prenom" type="text" class="form-control" placeholder="Prénom" name="prenom" [(ngModel)]="patientModel.name[0].given[0]">
+                  </div>
+                  <div class="form-group" *ngIf="patientModel.name">
+                    <label for="nom">Nom</label>
+                    <input id="nom" type="text" class="form-control" placeholder="Nom" name="nom" [(ngModel)]="patientModel.name[0].family">
+                  </div>
+                  <div class="form-group" *ngIf="patientModel.name">
+                    <label for="prefix">Prefix</label>
+                    <input id="prefix" type="text" class="form-control" placeholder="prefix" name="prefix" [(ngModel)]="patientModel.name[0].prefix">
+                  </div>
+                  <div class="form-group" *ngIf="patientModel.name[0].given">
+                    <label for="titre">Titre</label>
+                    <input id="titre" type="text" class="form-control" placeholder="Titre" name="titre" [(ngModel)]="patientModel.name[0].given[1]">
+                  </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+                  <button class="btn btn-primary" (click)="addPatient()" data-dismiss="modal">Ajouter</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal  UPDATE-->
+          <div class="modal fade" id="UpdateModal" #UpdateModal >
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content" >
+                <div class="modal-header">
+                  <h5 class="modal-title">Modifier un patient</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" >
+                  <form #f="ngForm" (ngSubmit)="updatePatient()" *ngIf="editPatientModel">
+
+                    <div class="form-group" *ngIf="editPatientModel.name[0].given">
+                      <label for="prenomEdit">Prénom</label>
+                      <input id="prenomEdit" type="text" class="form-control" placeholder="Prénom" name="prenomEdit" [(ngModel)]="editPatientModel.name[0].given[0]">
+                    </div>
+                    <div class="form-group" *ngIf="editPatientModel.name">
+                      <label for="nomEdit">Nom</label>
+                      <input id="nomEdit" type="text" class="form-control" placeholder="Nom" name="nomEdit" [(ngModel)]="editPatientModel.name[0].family">
+                    </div>
+                    <div class="form-group" *ngIf="patientModel.name">
+                      <label for="prefixEdit">Prefix</label>
+                      <input id="prefixEdit" type="text" class="form-control" placeholder="prefixEdit" name="prefixEdit" [(ngModel)]="editPatientModel.name[0].prefix">
+                    </div>
+                    <div class="form-group" *ngIf="editPatientModel.name[0].given">
+                      <label for="titreEdit">Titre</label>
+                      <input id="titreEdit" type="text" class="form-control" placeholder="Titre" name="titreEdit" [(ngModel)]="editPatientModel.name[0].given[1]">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+
+                  <button class="btn btn-dark" (click)="updatePatient()" data-dismiss="modal"><i class="fa fa-check-square-o"></i>Modifier</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+
+        <!-- Liste des patients -->
+        <!-- Basic Table-->
+        <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Basic Table</h5>
+                  <div class="table-responsive">
+                    <table class="table" *ngIf="listPatientModel">
+                      <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prefix</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col"
+colspan="2">Action</th>
+                      </tr>
+                      </thead>
+                      <tbody *ngFor="let patient of listPatientModel">
+                      <tr  *ngIf="checkPatient(patient)">
+
+                        <th scope="row">{{patient.id}}</th>
+                        <td >{{patient.name[0].given[0]}}</td>
+                        <td >{{patient.name[0].family}}</td>
+                        <td >{{patient.name[0].prefix}}</td>
+                        <td >{{patient.name[0].given[1]}}</td>
+
+                        <td>
+                          <div class="btn-group m-1">
+                            <button class="btn btn-sm btn-info" >Details</button>
+                          <button class="btn btn-sm btn-dark" (click)="editPatient(patient,UpdateModal)"  >Modifier</button>
+
+                          <button class="btn btn-sm btn-danger" (click)="deletePatient(patient)">Supprimer</button>
+                          </div>
+                        </td>
+
+
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- / Basic Table-->
+            <!-- Fin liste des patients -->
+            </div>
+      </div>
 </div>

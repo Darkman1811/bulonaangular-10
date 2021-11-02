@@ -1,0 +1,40 @@
+<!-- Large Size Modal -->
+<button class="btn btn-primary  m-1" data-toggle="modal" data-target="#AjoutModal">Ajouter un patient</button>
+<!-- Modal  AJOUT-->
+<div class="modal fade" id="AjoutModal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Ajouter un patient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" (ngSubmit)="addPatient()" *ngIf="patientModel">
+
+          <div class="form-group" *ngIf="patientModel.name[0].given">
+            <label for="prenom">Prénom</label>
+            <input id="prenom" type="text" class="form-control" placeholder="Prénom" name="prenom" [(ngModel)]="patientModel.name[0].given[0]">
+          </div>
+          <div class="form-group" *ngIf="patientModel.name">
+            <label for="nom">Nom</label>
+            <input id="nom" type="text" class="form-control" placeholder="Nom" name="nom" [(ngModel)]="patientModel.name[0].family">
+          </div>
+          <div class="form-group" *ngIf="patientModel.name">
+            <label for="prefix">Prefix</label>
+            <input id="prefix" type="text" class="form-control" placeholder="prefix" name="prefix" [(ngModel)]="patientModel.name[0].prefix">
+          </div>
+          <div class="form-group" *ngIf="patientModel.name[0].given">
+            <label for="titre">Titre</label>
+            <input id="titre" type="text" class="form-control" placeholder="Titre" name="titre" [(ngModel)]="patientModel.name[0].given[1]">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Save changes</button>
+        <button class="btn btn-primary" (click)="addPatient()" data-dismiss="modal">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
